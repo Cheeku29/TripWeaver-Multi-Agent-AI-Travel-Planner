@@ -50,13 +50,14 @@ You'll need the following before you start:
   - [Tavily](https://tavily.com/)
   - [AviationStack](https://aviationstack.com/)
   - [OpenWeather](https://openweathermap.org/api)
+  - [LangSmith](https://smith.langchain.com/) *(optional, for agent observability & tracing)*
 
 ### Installing
 
 Clone the repository and move into it:
 
 ```bash
-git clone https://github.com/KalyanM45/TripWeaver-Multi-Agent-AI-Travel-Planner.git
+git clone https://github.com/Cheeku29/TripWeaver-Multi-Agent-AI-Travel-Planner.git
 cd TripWeaver-Multi-Agent-AI-Travel-Planner
 ```
 
@@ -80,6 +81,11 @@ OPENWEATHER_API_KEY=your_openweather_key
 
 # Optional
 GROQ_MODEL=openai/gpt-oss-20b
+
+# Observability (LangSmith)
+LANGCHAIN_TRACING_V2=true
+LANGCHAIN_API_KEY=your_langsmith_key
+LANGCHAIN_PROJECT=tripweaver
 ```
 
 Here's what each one is for:
@@ -92,7 +98,9 @@ Here's what each one is for:
 | `AVIATIONSTACK_API_KEY` | ✅ | Airport and airline information |
 | `OPENWEATHER_API_KEY` | ✅ | Weather and forecasts |
 | `GROQ_MODEL` | ❌ | Switch the AI model without editing any code |
-| `LANGCHAIN_API_KEY` | ❌ | LangSmith tracing for agents, LLM calls and latency |
+| `LANGCHAIN_TRACING_V2` | ❌ | Set to `true` to enable LangSmith agent tracing |
+| `LANGCHAIN_API_KEY` | ❌ | LangSmith API key for agent, LLM and latency observability |
+| `LANGCHAIN_PROJECT` | ❌ | LangSmith project name (defaults to `tripweaver`) |
 
 Your `.env` file is ignored by Git. Never commit real keys.
 
@@ -141,6 +149,23 @@ Your results are split into tabs so you can jump straight to what you need:
 - Use the icons at the top of a result to **copy**, **download as Markdown** or **print**
 - Click **New trip** to start fresh
 - Switch between **light and dark mode** with the sun/moon icon at the bottom of the sidebar
+
+### 🔭 Observability with LangSmith
+
+TripWeaver natively integrates with [LangSmith](https://smith.langchain.com/) for end-to-end tracing:
+- **Node-by-node timeline**: Visualize execution times for Flight, Hotel, Weather, Itinerary, and Final agents.
+- **Payload inspection**: Inspect the exact inputs, prompt templates, and tool outputs passed between agents.
+- **Token & latency analytics**: Track LLM token usage and latency metrics per request.
+
+To view traces:
+1. Create a free account at [smith.langchain.com](https://smith.langchain.com/) and generate an API key in **Settings > API Keys**.
+2. Add your key to `.env` (or your hosting platform's environment variables):
+   ```dotenv
+   LANGCHAIN_TRACING_V2=true
+   LANGCHAIN_API_KEY=lsv2_pt_...
+   LANGCHAIN_PROJECT=tripweaver
+   ```
+3. Run a query and view live traces under the `tripweaver` project in your LangSmith dashboard.
 
 ## 🤔 Troubleshooting <a name = "troubleshooting"></a>
 
@@ -220,7 +245,7 @@ and how you tested it.
 
 ### Reporting bugs and suggesting ideas
 
-Open an [issue](https://github.com/KalyanM45/TripWeaver-Multi-Agent-AI-Travel-Planner/issues).
+Open an [issue](https://github.com/Cheeku29/TripWeaver-Multi-Agent-AI-Travel-Planner/issues).
 For bugs, include what you did, what you expected, what happened instead, and
 any error output from the terminal.
 
@@ -229,6 +254,7 @@ any error output from the terminal.
 - [Groq](https://groq.com/) for fast AI inference
 - [Tavily](https://tavily.com/), [AviationStack](https://aviationstack.com/) and
   [OpenWeather](https://openweathermap.org/) for the live travel data
+- [LangSmith](https://smith.langchain.com/) for agent tracing and observability
 
 ---
 
