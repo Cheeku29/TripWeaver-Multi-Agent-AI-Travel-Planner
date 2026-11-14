@@ -1,10 +1,5 @@
 <h1 align="center">TripWeaver</h1>
 
-<p align="center">
-  <img src="https://img.shields.io/badge/status-in%20progress-f59e0b.svg" alt="Status">
-  <a href="LICENSE"><img src="https://img.shields.io/badge/license-GPL--3.0-blue.svg" alt="License"></a>
-</p>
-
 ---
 
 <p align="center"> A multi-agent AI travel planner. Describe the trip you want in
