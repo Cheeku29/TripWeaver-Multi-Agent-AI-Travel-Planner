@@ -92,6 +92,7 @@ Here's what each one is for:
 | `AVIATIONSTACK_API_KEY` | ✅ | Airport and airline information |
 | `OPENWEATHER_API_KEY` | ✅ | Weather and forecasts |
 | `GROQ_MODEL` | ❌ | Switch the AI model without editing any code |
+| `LANGCHAIN_API_KEY` | ❌ | LangSmith tracing for agents, LLM calls and latency |
 
 Your `.env` file is ignored by Git. Never commit real keys.
 

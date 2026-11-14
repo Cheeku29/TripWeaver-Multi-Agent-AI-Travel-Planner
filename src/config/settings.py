@@ -116,6 +116,27 @@ COOKIE_SECURE = os.getenv(
 ).lower() in ("true", "1", "yes")
 
 
+# =========================
+# Observability (LangSmith)
+# =========================
+
+LANGCHAIN_API_KEY = os.getenv("LANGCHAIN_API_KEY") or os.getenv("LANGSMITH_API_KEY")
+LANGCHAIN_PROJECT = os.getenv("LANGCHAIN_PROJECT", "tripweaver")
+LANGCHAIN_ENDPOINT = os.getenv("LANGCHAIN_ENDPOINT", "https://api.smith.langchain.com")
+
+_tracing_env = os.getenv("LANGCHAIN_TRACING_V2", "")
+LANGCHAIN_TRACING_V2 = (
+    _tracing_env.lower() in ("true", "1", "yes")
+    or (bool(LANGCHAIN_API_KEY) and _tracing_env.lower() not in ("false", "0", "no"))
+)
+
+if LANGCHAIN_TRACING_V2 and LANGCHAIN_API_KEY:
+    os.environ["LANGCHAIN_TRACING_V2"] = "true"
+    os.environ["LANGCHAIN_API_KEY"] = LANGCHAIN_API_KEY
+    os.environ["LANGCHAIN_PROJECT"] = LANGCHAIN_PROJECT
+    os.environ["LANGCHAIN_ENDPOINT"] = LANGCHAIN_ENDPOINT
+
+
 def get_groq_api_key() -> str:
     if not GROQ_API_KEY:
         raise ValueError(
